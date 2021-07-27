@@ -31,16 +31,13 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') movieId: number) {
+  remove(@Param('id') movieId: string) {
     return this.moviesService.remove(movieId);
   }
 
   // 전체를 업데이트 할때 Put , 일부를 업데이트 할때 Patch
   @Patch(':id')
-  patch(@Param('id') movieId: number, @Body() updateData) {
-    return {
-      updateMovie: movieId,
-      ...updateData,
-    };
+  patch(@Param('id') movieId: string, @Body() updateData) {
+    return this.moviesService.update(movieId, updateData);
   }
 }
